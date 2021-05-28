@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Technologies} from "./components/Hechnoliges";
+import {Technologies} from "./components/Technoliges";
 import {Header} from "./components/Header";
 import {Footer} from "./components/Footer";
 
