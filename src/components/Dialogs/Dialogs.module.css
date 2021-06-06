@@ -1,0 +1,18 @@
+.dialogs {
+display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogs_items a.active {
+    color: goldenrod;
+}
+.item a.activeLink {
+    color: goldenrod;
+}
+
+.dialog {
+    color: white;
+}
+.massages{
+margin: 16px 0;
+}

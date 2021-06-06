@@ -1,0 +1,12 @@
+.dialog{
+    color: goldenrod;
+}
+.myposts{
+    padding: 20px;
+}
+.textArea, .btn{
+    display: block;
+}
+.posts{
+    margin-top:10px ;
+}
