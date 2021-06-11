@@ -10,6 +10,8 @@ import {addPost, RootStateType} from "./redux/state";
 type AppStatePropsType={
     appState:RootStateType
     addPostCallback:(postMessage:string)=>void
+    updateNewPostText:(text:string)=>void
+    mes:string
 }
 
 
@@ -24,7 +26,7 @@ function App(props:AppStatePropsType) {
                     <Route path={"/Dialogs"} render={() => <Dialogs
                         dialogs={props.appState.dialogsPage.dialogs}
                         messages={props.appState.dialogsPage.messages}/>}/>
-                    <Route path="/Profile" render={() => <Profile posts={props.appState.profilePage.posts} addPostCallback={props.addPostCallback} />}/>
+                    <Route path="/Profile" render={() => <Profile posts={props.appState.profilePage.posts} addPostCallback={props.addPostCallback} updateNewPostText={props.updateNewPostText} mes={props.mes} />}/>
                 </div>
 
             </div>

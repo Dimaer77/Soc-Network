@@ -4,10 +4,10 @@
     <list default="true" id="2c67f0b1-67fa-4359-9682-36898bf639d2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/Dialogs.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Profile/Myposts/Mypost.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Myposts/Mypost.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/state.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/render.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/render.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +90,7 @@
       <workItem from="1622969745676" duration="7074000" />
       <workItem from="1623002316580" duration="1463000" />
       <workItem from="1623228397458" duration="5309000" />
-      <workItem from="1623398677194" duration="7630000" />
+      <workItem from="1623398677194" duration="13966000" />
     </task>
     <servers />
   </component>

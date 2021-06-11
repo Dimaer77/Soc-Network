@@ -6,6 +6,8 @@ import {addPost, DialogType, MessageType, PostType} from "../../../redux/state";
 export type ProfilePageType = {
     posts: Array<PostType>
     addPostCallback: (postMessage: string) => void
+    updateNewPostText: (text: string) => void
+    mes:string
 }
 export const MyPosts = (props: ProfilePageType) => {
 
@@ -15,7 +17,14 @@ export const MyPosts = (props: ProfilePageType) => {
     const addPost = () => {
         if (newPostElement.current) {
             props.addPostCallback(newPostElement.current.value)
-            newPostElement.current.value=""
+            props.updateNewPostText("")
+        }
+
+    }
+    const onPostChange = () => {
+        let text = newPostElement.current
+        if(text){
+            props.updateNewPostText(text.value)
         }
     }
 
@@ -24,7 +33,10 @@ export const MyPosts = (props: ProfilePageType) => {
         <div className={stl.myposts}>
             <h3>My Post</h3>
             <div>
-                <textarea ref={newPostElement} className={stl.textArea}/>
+                <textarea ref={newPostElement}
+                          value={props.mes}
+                         onChange={onPostChange}
+                          className={stl.textArea}/>
                 <button onClick={addPost} className={stl.btn}>add</button>
             </div>
             <div className={stl.posts}>
