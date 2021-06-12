@@ -5,13 +5,14 @@ import {Header} from "./components/Header/Header";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {addPost, RootStateType} from "./redux/state";
+import {RootStateType, store} from "./redux/state";
 
 type AppStatePropsType={
     appState:RootStateType
     addPostCallback:(postMessage:string)=>void
     updateNewPostText:(text:string)=>void
     mes:string
+
 }
 
 
@@ -26,7 +27,7 @@ function App(props:AppStatePropsType) {
                     <Route path={"/Dialogs"} render={() => <Dialogs
                         dialogs={props.appState.dialogsPage.dialogs}
                         messages={props.appState.dialogsPage.messages}/>}/>
-                    <Route path="/Profile" render={() => <Profile posts={props.appState.profilePage.posts} addPostCallback={props.addPostCallback} updateNewPostText={props.updateNewPostText} mes={props.mes} />}/>
+                    <Route path="/Profile" render={() => <Profile posts={props.appState.profilePage.posts} addPostCallback={props.addPostCallback} updateNewPostText={props.updateNewPostText.bind(store)}  mes={props.mes} />}/>
                 </div>
 
             </div>

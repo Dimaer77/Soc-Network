@@ -1,13 +1,14 @@
 import stl from "./Mypost.module.css"
 import React, {LegacyRef, RefObject} from "react" ;
 import {Post} from "./post/Post";
-import {addPost, DialogType, MessageType, PostType} from "../../../redux/state";
+import {PostType} from "../../../redux/state";
 
 export type ProfilePageType = {
     posts: Array<PostType>
     addPostCallback: (postMessage: string) => void
     updateNewPostText: (text: string) => void
-    mes:string
+    mes: string
+
 }
 export const MyPosts = (props: ProfilePageType) => {
 
@@ -17,13 +18,15 @@ export const MyPosts = (props: ProfilePageType) => {
     const addPost = () => {
         if (newPostElement.current) {
             props.addPostCallback(newPostElement.current.value)
-            props.updateNewPostText("")
+            props.updateNewPostText(" ")
+
         }
+
 
     }
     const onPostChange = () => {
         let text = newPostElement.current
-        if(text){
+        if (text) {
             props.updateNewPostText(text.value)
         }
     }
@@ -35,7 +38,7 @@ export const MyPosts = (props: ProfilePageType) => {
             <div>
                 <textarea ref={newPostElement}
                           value={props.mes}
-                         onChange={onPostChange}
+                          onChange={onPostChange}
                           className={stl.textArea}/>
                 <button onClick={addPost} className={stl.btn}>add</button>
             </div>
