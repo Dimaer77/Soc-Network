@@ -1,5 +1,9 @@
-import React from 'react';
-import {renderEntireTree} from "../render";
+let rerenderEntireTree = () => {
+
+}
+export const subscribe = (observer:()=>void) => {
+    rerenderEntireTree = observer
+}
 
 export type MessageType = {
     id: number
@@ -18,28 +22,28 @@ export type PostType = {
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText:string
+    newPostText: string
 }
-export type DialogsPageType ={
-    dialogs:Array<DialogType>
-    messages:Array<MessageType>
+export type DialogsPageType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
 
-}
-
-
-export type RootStateType ={
-    profilePage:ProfilePageType
-    dialogsPage:DialogsPageType
 }
 
-export let state:RootStateType = {
+
+export type RootStateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+}
+
+export let state: RootStateType = {
     profilePage: {
         posts: [
             {id: 1, message: "Asdfs", likesCount: 11},
             {id: 2, message: "Bsdfs", likesCount: 131},
             {id: 3, message: "Csdfs", likesCount: 11},
             {id: 4, message: "Dsdf", likesCount: 13234231}],
-        newPostText:"new-post"
+        newPostText: "new-post"
     },
     dialogsPage: {
         dialogs: [
@@ -58,18 +62,19 @@ export let state:RootStateType = {
         ]
     }
 }
- export const addPost = (postMessage:string)=>{
-    let newPost:PostType = {
-        id:5,
-        message:postMessage,
-        likesCount:100
+export const addPost = (postMessage: string) => {
+    let newPost: PostType = {
+        id: 5,
+        message: postMessage,
+        likesCount: 100
     }
     state.profilePage.posts.push(newPost)
-     renderEntireTree(state)
- }
+    rerenderEntireTree()
 
-export const updateNewPostText = (newText:string)=>{
-     state.profilePage.newPostText = newText
-        renderEntireTree(state)
 }
-export let val = state.profilePage.newPostText
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
+    rerenderEntireTree()
+}
+
