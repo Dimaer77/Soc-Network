@@ -1,7 +1,7 @@
 import stl from "./Mypost.module.css"
 import React, {LegacyRef, RefObject} from "react" ;
 import {Post} from "./post/Post";
-import {ActionType, addPostActionCreator, PostType, updateNewPostText} from "../../../redux/state";
+import {ActionType, addPostCreator, PostType, updateNewPostTextCreator} from "../../../redux/state";
 
 export type ProfilePageType = {
     posts: Array<PostType>
@@ -18,8 +18,8 @@ export const MyPosts = (props: ProfilePageType) => {
 
     const addPost = () => {
         if (newPostElement.current) {
-            props.dispatch(addPostActionCreator(newPostElement.current.value))
-            props.dispatch(updateNewPostText(""))
+            props.dispatch(addPostCreator(newPostElement.current.value))
+            props.dispatch(updateNewPostTextCreator(" "))
 
         }
 
@@ -29,7 +29,7 @@ export const MyPosts = (props: ProfilePageType) => {
         let text = newPostElement.current
 
         if (text) {
-            props.dispatch(updateNewPostText(text.value))
+            props.dispatch(updateNewPostTextCreator(text.value))
         }
     }
 
@@ -42,7 +42,7 @@ export const MyPosts = (props: ProfilePageType) => {
                           value={props.mes}
                           onChange={onPostChange}
                           className={stl.textArea}/>
-                <button onClick={addPost} className={stl.btn}>add</button>
+                <button onClick={addPost} className={stl.btn}>Send</button>
             </div>
             <div className={stl.posts}>
                 {postElements}

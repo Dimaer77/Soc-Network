@@ -11,6 +11,7 @@ type AppStatePropsType={
     appState:RootStateType
     dispatch:(action:ActionType)=>void
     mes:string
+    mesVal: string
 
 }
 
@@ -24,6 +25,8 @@ function App(props:AppStatePropsType) {
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
                     <Route path={"/Dialogs"} render={() => <Dialogs
+                        mesVal={props.appState.dialogsPage.newMessageBody}
+                        dispatch={props.dispatch}
                         dialogs={props.appState.dialogsPage.dialogs}
                         messages={props.appState.dialogsPage.messages}/>}/>
                     <Route path="/Profile" render={() => <Profile posts={props.appState.profilePage.posts} dispatch={props.dispatch}   mes={props.mes} />}/>

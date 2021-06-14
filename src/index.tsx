@@ -13,7 +13,7 @@ import ReactDOM from 'react-dom';
 
     ReactDOM.render(
         <BrowserRouter>
-            <App appState={store.getState()} dispatch={store.dispatch.bind(store)}   mes={store._state.profilePage.newPostText}  />
+            <App appState={store.getState()} dispatch={store.dispatch.bind(store)}   mes={store._state.profilePage.newPostText}  mesVal={store._state.dialogsPage.newMessageBody}/>
         </BrowserRouter>, document.getElementById("root"));
 }
 renderEntireTree();

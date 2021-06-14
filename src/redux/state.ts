@@ -27,6 +27,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+    newMessageBody: string
 
 }
 
@@ -86,20 +87,45 @@ type StoreType = {
     dispatch: (action: ActionType) => void
 }
 
-export type AddPostActionType = ReturnType<typeof addPostActionCreator>
-export type ChangeNewTextActionType = ReturnType<typeof updateNewPostText>
-export type ActionType = AddPostActionType | ChangeNewTextActionType
-export let addPostActionCreator = (postMessage:string)=>{
+// export type AddPostActionType = ReturnType<typeof addPostCreator>
+// export type ChangeNewTextActionType = ReturnType<typeof updateNewPostTextCreator>
+// export type UpdateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyCreator>
+// export type SendMessageActionType = ReturnType<typeof sendMessageCreator>;
+//
+
+// export type ActionType =
+//     AddPostActionType
+//     | ChangeNewTextActionType
+//     | SendMessageActionType
+//     | UpdateNewMessageBodyActionType
+
+export type ActionType =
+    ReturnType<typeof addPostCreator>
+    | ReturnType<typeof updateNewPostTextCreator>
+    | ReturnType<typeof sendMessageCreator>
+    | ReturnType<typeof updateNewMessageBodyCreator>
+export let addPostCreator = (postMessage: string) => {
     return {
         type: "ADD-POST",
-        postMessage:postMessage
-    }
+        postMessage: postMessage
+    } as const
 }
-export let updateNewPostText = (newText:string)=>{
+export let updateNewPostTextCreator = (newText: string) => {
     return {
-        type:"UPDATE-NEW-POST-TEXT",
-        newText:newText
-    }
+        type: "UPDATE-NEW-POST-TEXT",
+        newText: newText
+    } as const
+}
+export let updateNewMessageBodyCreator = (newText: string) => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-BODY",
+        mesBody: newText
+    } as const
+}
+export let sendMessageCreator = () => {
+    return {
+        type: "SEND-MESSAGE"
+    } as const
 }
 // export let store: StoreType = {
 //     _state: {
@@ -179,8 +205,10 @@ export let store: StoreType = {
                 {id: 3, message: "Hima"},
                 {id: 4, message: "Nimzxczxca"},
                 {id: 5, message: "Kimzxczxa"},
-            ]
-        }
+            ],
+            newMessageBody: "New Message"
+        },
+
     },
     getState() {
         return this._state
@@ -193,18 +221,35 @@ export let store: StoreType = {
         this._callSubscriber = observer
     },
 
-    dispatch(action: any) {
-        if (action.type === "ADD-POST") {
-            let newPost: PostType = {
-                id: 5,
-                message: action.postMessage,
-                likesCount: 100
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._callSubscriber()
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-            this._state.profilePage.newPostText = action.newText
-            this._callSubscriber()
+    dispatch(action) {
+        switch (action.type) {
+            case "ADD-POST":
+                let newPost: PostType = {
+                    id: 5,
+                    message: action.postMessage,
+                    likesCount: 100
+                }
+                this._state.profilePage.posts.push(newPost)
+                this._callSubscriber()
+                break;
+            case "UPDATE-NEW-POST-TEXT":
+                this._state.profilePage.newPostText = action.newText
+                this._callSubscriber()
+                break;
+            case "UPDATE-NEW-MESSAGE-BODY":
+                this._state.dialogsPage.newMessageBody = action.mesBody
+                this._callSubscriber()
+                break;
+            case "SEND-MESSAGE":
+                let mesBody = this._state.dialogsPage.newMessageBody;
+                let newMess: MessageType = {
+                    id: 5,
+                    message: mesBody,
+                }
+                this._state.dialogsPage.messages.push(newMess)
+                this._callSubscriber()
+                break;
         }
+
     }
 }
