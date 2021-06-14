@@ -7,8 +7,8 @@ import { PostType} from "../../redux/state";
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    addPostCallback:(postMessage:string)=>void
-    updateNewPostText:(text:string)=>void
+    dispatch:(action:any)=>void
+
     mes:string
 
 }
@@ -17,7 +17,7 @@ export const Profile = (props:ProfilePageType) => {
     return (
         <div>
             <ProfileInfo description="description"/>
-            <MyPosts posts={props.posts} addPostCallback={props.addPostCallback} updateNewPostText={props.updateNewPostText} mes={props.mes} />
+            <MyPosts posts={props.posts} dispatch={props.dispatch}  mes={props.mes} />
         </div>
     )
 }

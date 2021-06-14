@@ -5,8 +5,7 @@ import {PostType} from "../../../redux/state";
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    addPostCallback: (postMessage: string) => void
-    updateNewPostText: (text: string) => void
+    dispatch: (action: any) => void
     mes: string
 
 }
@@ -17,8 +16,8 @@ export const MyPosts = (props: ProfilePageType) => {
 
     const addPost = () => {
         if (newPostElement.current) {
-            props.addPostCallback(newPostElement.current.value)
-            props.updateNewPostText(" ")
+            props.dispatch({type:"ADD-POST", postMessage:newPostElement.current.value} )
+            props.dispatch({ type:"UPDATE-NEW-POST-TEXT",newText:" "})
 
         }
 
@@ -27,7 +26,7 @@ export const MyPosts = (props: ProfilePageType) => {
     const onPostChange = () => {
         let text = newPostElement.current
         if (text) {
-            props.updateNewPostText(text.value)
+            props.dispatch({type:"UPDATE-NEW-POST-TEXT", newText:text.value})
         }
     }
 

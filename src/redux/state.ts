@@ -80,14 +80,67 @@ export type RootStateType = {
 /////////////////////////////////
 type StoreType = {
     _state: RootStateType,
-    addPost: (postMessage: string) => void,
-    updateNewPostText: (newText: string) => void,
     _callSubscriber: () => void,
     subscribe: (observer: () => void) => void
-    getState:()=>RootStateType
+    getState: () => RootStateType
+    dispatch: (action: any) => void
 }
 
 
+// export let store: StoreType = {
+//     _state: {
+//         profilePage: {
+//             posts: [
+//                 {id: 1, message: "Asdfs", likesCount: 11},
+//                 {id: 2, message: "Bsdfs", likesCount: 131},
+//                 {id: 3, message: "Csdfs", likesCount: 11},
+//                 {id: 4, message: "Dsdf", likesCount: 13234231}],
+//             newPostText: ""
+//         },
+//         dialogsPage: {
+//             dialogs: [
+//                 {id: 1, name: "Dima"},
+//                 {id: 2, name: "Fima"},
+//                 {id: 3, name: "Hima"},
+//                 {id: 4, name: "Nima"},
+//                 {id: 5, name: "Kima"},
+//             ],
+//             messages: [
+//                 {id: 1, message: "asdasd"},
+//                 {id: 2, message: "Fiasdasdma"},
+//                 {id: 3, message: "Hima"},
+//                 {id: 4, message: "Nimzxczxca"},
+//                 {id: 5, message: "Kimzxczxa"},
+//             ]
+//         }
+//     },
+//     getState() {
+//         return this._state
+//     },
+//
+//     addPost(postMessage: string) {
+//         let newPost: PostType = {
+//             id: 5,
+//             message: postMessage,
+//             likesCount: 100
+//         }
+//         this._state.profilePage.posts.push(newPost)
+//         this._callSubscriber()
+//     },
+//     _callSubscriber() {
+//         console.log("asdas")
+//     },
+//
+//     updateNewPostText(newText: string) {
+//         debugger
+//         this._state.profilePage.newPostText = newText
+//         this._callSubscriber()
+//     },
+//     subscribe(observer) {
+//         this._callSubscriber = observer
+//     }
+//
+// }
 export let store: StoreType = {
     _state: {
         profilePage: {
@@ -119,26 +172,25 @@ export let store: StoreType = {
         return this._state
     },
 
-    addPost(postMessage: string) {
-        let newPost: PostType = {
-            id: 5,
-            message: postMessage,
-            likesCount: 100
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._callSubscriber()
-    },
     _callSubscriber() {
         console.log("asdas")
     },
-
-    updateNewPostText(newText: string) {
-        debugger
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber()
-    },
     subscribe(observer) {
         this._callSubscriber = observer
-    }
+    },
 
+    dispatch(action: any) {
+        if (action.type === "ADD-POST") {
+            let newPost: PostType = {
+                id: 5,
+                message: action.postMessage,
+                likesCount: 100
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._callSubscriber()
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber()
+        }
+    }
 }
