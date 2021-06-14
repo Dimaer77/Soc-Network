@@ -83,10 +83,24 @@ type StoreType = {
     _callSubscriber: () => void,
     subscribe: (observer: () => void) => void
     getState: () => RootStateType
-    dispatch: (action: any) => void
+    dispatch: (action: ActionType) => void
 }
 
-
+export type AddPostActionType = ReturnType<typeof addPostActionCreator>
+export type ChangeNewTextActionType = ReturnType<typeof updateNewPostText>
+export type ActionType = AddPostActionType | ChangeNewTextActionType
+export let addPostActionCreator = (postMessage:string)=>{
+    return {
+        type: "ADD-POST",
+        postMessage:postMessage
+    }
+}
+export let updateNewPostText = (newText:string)=>{
+    return {
+        type:"UPDATE-NEW-POST-TEXT",
+        newText:newText
+    }
+}
 // export let store: StoreType = {
 //     _state: {
 //         profilePage: {

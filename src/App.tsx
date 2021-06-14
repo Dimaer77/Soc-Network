@@ -5,11 +5,11 @@ import {Header} from "./components/Header/Header";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {RootStateType, store} from "./redux/state";
+import {ActionType, RootStateType, store} from "./redux/state";
 
 type AppStatePropsType={
     appState:RootStateType
-    dispatch:(action:any)=>void
+    dispatch:(action:ActionType)=>void
     mes:string
 
 }

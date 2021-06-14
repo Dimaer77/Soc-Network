@@ -2,12 +2,12 @@ import React from "react";
 import stl from "./Profile.module.css"
 import {MyPosts} from "./Myposts/Mypost";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import { PostType} from "../../redux/state";
+import {ActionType, PostType} from "../../redux/state";
 
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    dispatch:(action:any)=>void
+    dispatch:(action:ActionType)=>void
 
     mes:string
 

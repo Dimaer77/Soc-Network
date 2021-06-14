@@ -1,14 +1,16 @@
 import stl from "./Mypost.module.css"
 import React, {LegacyRef, RefObject} from "react" ;
 import {Post} from "./post/Post";
-import {PostType} from "../../../redux/state";
+import {ActionType, addPostActionCreator, PostType, updateNewPostText} from "../../../redux/state";
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    dispatch: (action: any) => void
+    dispatch: (action: ActionType) => void
     mes: string
-
 }
+
+
+
 export const MyPosts = (props: ProfilePageType) => {
 
     let postElements = props.posts.map(post => <Post key={post.id} message={post.message} likeCount={post.likesCount}/>)
@@ -16,8 +18,8 @@ export const MyPosts = (props: ProfilePageType) => {
 
     const addPost = () => {
         if (newPostElement.current) {
-            props.dispatch({type:"ADD-POST", postMessage:newPostElement.current.value} )
-            props.dispatch({ type:"UPDATE-NEW-POST-TEXT",newText:" "})
+            props.dispatch(addPostActionCreator(newPostElement.current.value))
+            props.dispatch(updateNewPostText(""))
 
         }
 
@@ -25,8 +27,9 @@ export const MyPosts = (props: ProfilePageType) => {
     }
     const onPostChange = () => {
         let text = newPostElement.current
+
         if (text) {
-            props.dispatch({type:"UPDATE-NEW-POST-TEXT", newText:text.value})
+            props.dispatch(updateNewPostText(text.value))
         }
     }
 

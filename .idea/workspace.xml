@@ -6,7 +6,6 @@
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Profile/Myposts/Mypost.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Myposts/Mypost.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/state.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +93,7 @@
       <workItem from="1623420725563" duration="6359000" />
       <workItem from="1623486377527" duration="4678000" />
       <workItem from="1623506996511" duration="4279000" />
-      <workItem from="1623653969989" duration="4283000" />
+      <workItem from="1623653969989" duration="9147000" />
     </task>
     <servers />
   </component>
