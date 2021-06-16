@@ -1,7 +1,8 @@
 import stl from "./Mypost.module.css"
 import React, {LegacyRef, RefObject} from "react" ;
 import {Post} from "./post/Post";
-import {ActionType, addPostCreator, PostType, updateNewPostTextCreator} from "../../../redux/state";
+import {ActionType, PostType} from "../../../redux/store";
+import {addPostCreator, updateNewPostTextCreator} from "../../../redux/profile-reducer";
 
 export type ProfilePageType = {
     posts: Array<PostType>
@@ -10,27 +11,23 @@ export type ProfilePageType = {
 }
 
 
-
 export const MyPosts = (props: ProfilePageType) => {
 
     let postElements = props.posts.map(post => <Post key={post.id} message={post.message} likeCount={post.likesCount}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-        if (newPostElement.current) {
-            props.dispatch(addPostCreator(newPostElement.current.value))
-            props.dispatch(updateNewPostTextCreator(" "))
-
-        }
-
+        debugger
+        props.dispatch(addPostCreator())
 
     }
-    const onPostChange = () => {
-        let text = newPostElement.current
 
-        if (text) {
-            props.dispatch(updateNewPostTextCreator(text.value))
-        }
+    const onPostChange = () => {
+        debugger
+       if(newPostElement.current){
+           let text = newPostElement.current.value
+           props.dispatch(updateNewPostTextCreator(text))
+       }
     }
 
 

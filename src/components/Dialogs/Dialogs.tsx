@@ -6,10 +6,9 @@ import {
     ActionType,
     DialogType,
     MessageType,
-    RootStateType, sendMessageCreator,
-    updateNewMessageBodyCreator,
-    updateNewPostTextCreator
-} from "../../redux/state";
+    RootStateType,
+} from "../../redux/store";
+import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
 
 export type DialogsPageType = {
     dialogs: Array<DialogType>
@@ -26,12 +25,12 @@ export const Dialogs = (props: DialogsPageType) => {
     // const refElement = React.createRef<HTMLTextAreaElement>()
 
     let onSendMessageClick = ()=>{
-        props.dispatch(sendMessageCreator())
-        props.dispatch(updateNewMessageBodyCreator(" "))
+        props.dispatch(sendMessageAC())
+        props.dispatch(updateNewMessageBodyAC(" "))
     }
 let onNewMessageChange = (e:ChangeEvent<HTMLTextAreaElement>)=>{
       let mesValue =  e.target.value
-    props.dispatch(updateNewMessageBodyCreator(mesValue))
+    props.dispatch(updateNewMessageBodyAC(mesValue))
 
     }
 

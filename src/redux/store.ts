@@ -1,9 +1,6 @@
-// let rerenderEntireTree = () => {
-//
-// }
-// export const subscribe = (observer:()=>void) => {
-//     rerenderEntireTree = observer
-// }
+import {addPostCreator, profileReducer, updateNewPostTextCreator} from "./profile-reducer";
+import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
+import {sidebarReducer} from "./sidebar-reducer";
 
 export type MessageType = {
     id: number
@@ -35,6 +32,7 @@ export type DialogsPageType = {
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
+    // sidebar: string
 }
 
 // export let state: RootStateType = {
@@ -79,7 +77,7 @@ export type RootStateType = {
 //     rerenderEntireTree()
 // }
 /////////////////////////////////
-type StoreType = {
+export type StoreType = {
     _state: RootStateType,
     _callSubscriber: () => void,
     subscribe: (observer: () => void) => void
@@ -99,34 +97,12 @@ type StoreType = {
 //     | SendMessageActionType
 //     | UpdateNewMessageBodyActionType
 
-export type ActionType =
-    ReturnType<typeof addPostCreator>
+export type ActionType = ReturnType<typeof addPostCreator>
     | ReturnType<typeof updateNewPostTextCreator>
-    | ReturnType<typeof sendMessageCreator>
-    | ReturnType<typeof updateNewMessageBodyCreator>
-export let addPostCreator = (postMessage: string) => {
-    return {
-        type: "ADD-POST",
-        postMessage: postMessage
-    } as const
-}
-export let updateNewPostTextCreator = (newText: string) => {
-    return {
-        type: "UPDATE-NEW-POST-TEXT",
-        newText: newText
-    } as const
-}
-export let updateNewMessageBodyCreator = (newText: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-BODY",
-        mesBody: newText
-    } as const
-}
-export let sendMessageCreator = () => {
-    return {
-        type: "SEND-MESSAGE"
-    } as const
-}
+    | ReturnType<typeof sendMessageAC>
+    | ReturnType<typeof updateNewMessageBodyAC>
+
+
 // export let store: StoreType = {
 //     _state: {
 //         profilePage: {
@@ -189,7 +165,7 @@ export let store: StoreType = {
                 {id: 2, message: "Bsdfs", likesCount: 131},
                 {id: 3, message: "Csdfs", likesCount: 11},
                 {id: 4, message: "Dsdf", likesCount: 13234231}],
-            newPostText: ""
+            newPostText: "qwoekqwkr"
         },
         dialogsPage: {
             dialogs: [
@@ -208,7 +184,7 @@ export let store: StoreType = {
             ],
             newMessageBody: "New Message"
         },
-
+        // sidebar: ""
     },
     getState() {
         return this._state
@@ -222,34 +198,38 @@ export let store: StoreType = {
     },
 
     dispatch(action) {
-        switch (action.type) {
-            case "ADD-POST":
-                let newPost: PostType = {
-                    id: 5,
-                    message: action.postMessage,
-                    likesCount: 100
-                }
-                this._state.profilePage.posts.push(newPost)
-                this._callSubscriber()
-                break;
-            case "UPDATE-NEW-POST-TEXT":
-                this._state.profilePage.newPostText = action.newText
-                this._callSubscriber()
-                break;
-            case "UPDATE-NEW-MESSAGE-BODY":
-                this._state.dialogsPage.newMessageBody = action.mesBody
-                this._callSubscriber()
-                break;
-            case "SEND-MESSAGE":
-                let mesBody = this._state.dialogsPage.newMessageBody;
-                let newMess: MessageType = {
-                    id: 5,
-                    message: mesBody,
-                }
-                this._state.dialogsPage.messages.push(newMess)
-                this._callSubscriber()
-                break;
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        // this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+        this._callSubscriber()
+        // switch (action.type) {
+        //     case "ADD-POST":
+        //         let newPost: PostType = {
+        //             id: 5,
+        //             message: action.postMessage,
+        //             likesCount: 100
+        //         }
+        //         this._state.profilePage.posts.push(newPost)
+        //         this._callSubscriber()
+        //         break;
+        //     case "UPDATE-NEW-POST-TEXT":
+        //         this._state.profilePage.newPostText = action.newText
+        //         this._callSubscriber()
+        //         break;
+        //     case "UPDATE-NEW-MESSAGE-BODY":
+        //         this._state.dialogsPage.newMessageBody = action.mesBody
+        //         this._callSubscriber()
+        //         break;
+        //     case "SEND-MESSAGE":
+        //         let mesBody = this._state.dialogsPage.newMessageBody;
+        //         let newMess: MessageType = {
+        //             id: 5,
+        //             message: mesBody,
+        //         }
+        //         this._state.dialogsPage.messages.push(newMess)
+        //         this._callSubscriber()
+        //         break;
+        // }
 
     }
 }
