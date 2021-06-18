@@ -5,13 +5,15 @@ import {Header} from "./components/Header/Header";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {ActionType, RootStateType, store} from "./redux/store";
+import {ActionType, RootStateType,  StoreType} from "./redux/store";
+import {allTypeReduce} from "./redux/redux-store";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 type AppStatePropsType = {
-    appState: RootStateType
+    state: allTypeReduce
     dispatch: (action: ActionType) => void
-    mes: string
-    mesVal: string
+    // mes: string
+    // mesVal: string
 
 }
 
@@ -23,16 +25,21 @@ function App(props: AppStatePropsType) {
                 <Header/>
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
-                    <Route path={"/Dialogs"} render={() => <Dialogs
-                        mesVal={props.appState.dialogsPage.newMessageBody}
+                    <Route path={"/Dialogs"} render={() => <DialogsContainer
+                        store={props.state}
+                        // mesVal={props.store.getState().dialogsPage.newMessageBody}
                         dispatch={props.dispatch}
-                        dialogs={props.appState.dialogsPage.dialogs}
-                        messages={props.appState.dialogsPage.messages}/>}/>
+                        // dialogs={props.store.dialogsPage.dialogs}
+                        // messages={props.store.getState().dialogsPage.messages}
+                    />}
+                    />
                     <Route path="/Profile" render={() =>
                         <Profile
-                            posts={props.appState.profilePage.posts}
+                            // posts={props.store.getState().profilePage.posts}
+                            store={props.state}
                             dispatch={props.dispatch}
-                            mes={props.mes}/>}/>
+                            // mes={props.mes}
+                        />}/>
                 </div>
 
             </div>

@@ -6,9 +6,11 @@ import {addPostCreator, updateNewPostTextCreator} from "../../../redux/profile-r
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    dispatch: (action: ActionType) => void
+    addPost:()=>void
+    updateNewPostText: (text: string) => void
     mes: string
 }
+
 
 
 export const MyPosts = (props: ProfilePageType) => {
@@ -16,17 +18,16 @@ export const MyPosts = (props: ProfilePageType) => {
     let postElements = props.posts.map(post => <Post key={post.id} message={post.message} likeCount={post.likesCount}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    const addPost = () => {
-        debugger
-        props.dispatch(addPostCreator())
+    const onAddPost = () => {
+        props.addPost()
 
     }
 
     const onPostChange = () => {
-        debugger
+
        if(newPostElement.current){
            let text = newPostElement.current.value
-           props.dispatch(updateNewPostTextCreator(text))
+           props.updateNewPostText(text)
        }
     }
 
@@ -39,7 +40,7 @@ export const MyPosts = (props: ProfilePageType) => {
                           value={props.mes}
                           onChange={onPostChange}
                           className={stl.textArea}/>
-                <button onClick={addPost} className={stl.btn}>Send</button>
+                <button onClick={onAddPost} className={stl.btn}>Send</button>
             </div>
             <div className={stl.posts}>
                 {postElements}

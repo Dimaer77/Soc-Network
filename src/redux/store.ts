@@ -1,6 +1,6 @@
 import {addPostCreator, profileReducer, updateNewPostTextCreator} from "./profile-reducer";
 import {dialogsReducer, sendMessageAC, updateNewMessageBodyAC} from "./dialogs-reducer";
-import {sidebarReducer} from "./sidebar-reducer";
+
 
 export type MessageType = {
     id: number
@@ -183,7 +183,7 @@ export let store: StoreType = {
                 {id: 5, message: "Kimzxczxa"},
             ],
             newMessageBody: "New Message"
-        },
+        }
         // sidebar: ""
     },
     getState() {

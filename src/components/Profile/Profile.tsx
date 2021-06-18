@@ -1,14 +1,17 @@
 import React from "react";
-import stl from "./Profile.module.css"
-import {MyPosts} from "./Myposts/Mypost";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionType, PostType} from "../../redux/store";
+import {ActionType, PostType, RootStateType, StoreType} from "../../redux/store";
+import {MyPostsContainer} from "./Myposts/MypostContainer";
+import {allTypeReduce} from "../../redux/redux-store";
 
 
 export type ProfilePageType = {
-    posts: Array<PostType>
+    // posts: Array<PostType>
     dispatch:(action:ActionType)=>void
-    mes:string
+    // mes:string
+    store: allTypeReduce
+
+
 
 }
 
@@ -16,7 +19,11 @@ export const Profile = (props:ProfilePageType) => {
     return (
         <div>
             <ProfileInfo description="description"/>
-            <MyPosts posts={props.posts} dispatch={props.dispatch}  mes={props.mes} />
+            <MyPostsContainer
+                // posts={props.store.getS}
+                dispatch={props.dispatch}
+                // mes={props.mes}
+                store={props.store} />
         </div>
     )
 }
