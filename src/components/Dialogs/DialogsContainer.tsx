@@ -1,48 +1,55 @@
-import React, {ChangeEvent} from "react";
-import stl from "./Dialogs.module.css"
-import {DialogItem} from "./DialogItem/DialogItem";
-import {Message} from "./Message/Message";
+import React from "react";
+import { StoreType } from "../../redux/store";
 import {
-    ActionType,
-    DialogType,
-    MessageType,
-    RootStateType,
-} from "../../redux/store";
-import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
-import {allTypeReduce} from "../../redux/redux-store";
-import {Dialogs} from "./Dialogs";
+  sendMessageAC,
+  updateNewMessageBodyAC,
+} from "../../redux/dialogs-reducer";
+import { Dialogs } from "./Dialogs";
+import { connect } from "react-redux";
 
 export type DialogsPageType = {
-    store:allTypeReduce
-    dispatch: (action: ActionType) => void
+  store: StoreType;
+};
 
+// export const DialogsContainer = (props: DialogsPageType) => {
+//   // const dialogsElement = props.dialogsPage.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
+//   // const messagesElement = props.dialogsPage.messages.map(mes => <Message message={mes.message}/>)
 
-}
+//   // const refElement = React.createRef<HTMLTextAreaElement>()
 
-export const DialogsContainer = (props: DialogsPageType) => {
-    // const dialogsElement = props.dialogsPage.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
-    // const messagesElement = props.dialogsPage.messages.map(mes => <Message message={mes.message}/>)
+//   let onSendMessageClick = () => {
+//     props.store.dispatch(sendMessageAC());
+//     props.store.dispatch(updateNewMessageBodyAC(" "));
+//   };
+//   let onNewMessageChange = (mesValue: string) => {
+//     props.store.dispatch(updateNewMessageBodyAC(mesValue));
+//   };
 
-    // const refElement = React.createRef<HTMLTextAreaElement>()
+//   return (
+//     <Dialogs
+//       updateNewMessageBody={onNewMessageChange}
+//       sendMessage={onSendMessageClick}
+//       dialogsPage={props.store.getState().dialogsPage}
+//       // messages={props.store.getState().dialogsPage.messages}
+//       // mesVal={props.store.getState().dialogsPage.newMessageBody}
+//     />
+//   );
+// };
+let mapStateToProps = (state: any) => {
+  return { dialogsPage: state.dialogsPage };
+};
+let mapDispatchToProps = (dispatch: any) => {
+  return {
+    updateNewMessageBody: (mesValue: string) =>
+      dispatch(updateNewMessageBodyAC(mesValue)),
+    sendMessage: () => {
+      dispatch(sendMessageAC());
+      dispatch(updateNewMessageBodyAC(" "));
+    },
+  };
+};
 
-    let onSendMessageClick = ()=>{
-        props.dispatch(sendMessageAC())
-        props.dispatch(updateNewMessageBodyAC(" "))
-    }
-let onNewMessageChange = (mesValue:string)=>{
-    props.dispatch(updateNewMessageBodyAC(mesValue))
-
-    }
-
-
-
-    return (
-       <Dialogs updateNewMessageBody={onNewMessageChange}
-                sendMessage={onSendMessageClick}
-                dialogs={props.store.dialogsPage.dialogs}
-                messages={props.store.dialogsPage.messages}
-                mesVal={props.store.dialogsPage.newMessageBody}
-       />
-
-    )
-}
+export const DialogsContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dialogs);
