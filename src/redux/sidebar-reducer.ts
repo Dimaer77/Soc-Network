@@ -1,4 +1,4 @@
-import { ActionType, MessageType, PostType, RootStateType } from "./store";
+import { ActionType } from "./store";
 
 let initialState = {};
 export const sidebarReducer = (

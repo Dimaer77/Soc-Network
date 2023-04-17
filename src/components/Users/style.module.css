@@ -1,0 +1,38 @@
+.userContainer {
+    display: flex;
+    padding: 5px;
+}
+
+.imageBox {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.avatar {
+    width: 70px;
+    height: 75px;
+    border-radius: 50%;
+}
+
+.infoContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 25px 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+
+}
+
+.nameContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.locationContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
